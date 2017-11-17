@@ -9,44 +9,32 @@ public class Paciente {
 	private String endereco;
 	private String cidade;
 	private String estado;
-	private Posto posto;
 	
-	public Paciente(String cpf,  String nome, Date dataNasc, String endereco,
-			String cidade, String estado, Posto posto) {
+	
+	public Paciente(String nome, Date dataNasc, String endereco, String cidade,
+			String estado) {
+		super();
+		this.nome = nome;
+		this.dataNasc = dataNasc;
+		this.endereco = endereco;
+		this.cidade = cidade;
+		this.estado = estado;
+	}
+	public Paciente(String cpf, String nome, Date dataNasc, String endereco,
+			String cidade, String estado) {
 		super();
 		this.cpf = cpf;
-		this.dataNasc = dataNasc;
 		this.nome = nome;
-		this.setEndereco(endereco);
+		this.dataNasc = dataNasc;
+		this.endereco = endereco;
 		this.cidade = cidade;
 		this.estado = estado;
-		this.posto = posto;
 	}
-
-
-	public Paciente(String nome, Date dataNasc, String endereco, String cidade,
-			String estado, Posto posto) {
-		super();
-		this.dataNasc = dataNasc;
-		this.nome = nome;
-		this.setEndereco(endereco);
-		this.cidade = cidade;
-		this.estado = estado;
-		this.posto = posto;
-	}
-	
-	
 	public String getCpf() {
 		return cpf;
 	}
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-	public Posto getPosto() {
-		return posto;
-	}
-	public void setPosto(Posto posto) {
-		this.posto = posto;
 	}
 	public String getNome() {
 		return nome;

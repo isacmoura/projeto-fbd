@@ -9,7 +9,7 @@ public class ConnectionFactory {
 	private final int port = 5432;
 	private final String user = "postgres";
 	private final String password = "chagrazar";
-	private final String database = "posto de saúde";
+	private final String database = "posto_saude";
     
 	public Connection getConnection() {
         try {
