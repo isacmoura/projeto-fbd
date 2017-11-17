@@ -20,8 +20,8 @@ public class PacienteDAO {
 	public PacienteDAO(){ }
 	
 	public boolean addPosto(Paciente paciente){
-		String sql = "INSERT INTO Paciente(cpf, nome, dataNasc, endereco, cidade, "
-				+ "estado) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO Paciente(cpf, nome, endereco, cidade, "
+				+ "estado, dataNasc) VALUES (?, ?, ?, ?, ?, ?)";
 		this.connection = new ConnectionFactory().getConnection();
 		
 		try{
@@ -29,11 +29,10 @@ public class PacienteDAO {
 			
 			stmt.setString(1, paciente.getCpf());
 			stmt.setString(2, paciente.getNome());
-			stmt.setDate(3,paciente.getDataNasc());
-			stmt.setString(4, paciente.getEndereco());
-			stmt.setString(5, paciente.getCidade());
-			stmt.setString(6, paciente.getEstado());
-			
+			stmt.setString(3, paciente.getEndereco());
+			stmt.setString(4, paciente.getCidade());
+			stmt.setString(5, paciente.getEstado());
+			stmt.setDate(6,paciente.getDataNasc());
 			
 			int qtdRowsAffected = stmt.executeUpdate();
 			stmt.close();

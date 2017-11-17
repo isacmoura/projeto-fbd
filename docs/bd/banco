@@ -5,7 +5,7 @@
 -- Dumped from database version 10.0
 -- Dumped by pg_dump version 10.0
 
--- Started on 2017-11-16 22:37:33
+-- Started on 2017-11-16 23:32:17
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -99,11 +99,11 @@ ALTER SEQUENCE equipamentos_idequipamentos_seq OWNED BY equipamentos.idequipamen
 CREATE TABLE paciente (
     cpf character varying(14) NOT NULL,
     nome character varying(150),
-    dtnascimento date,
     endereco character varying(170),
     complemento character varying(16),
     cidade character varying(80),
-    estado character(2)
+    estado character(2),
+    datanasc date
 );
 
 
@@ -192,7 +192,7 @@ COPY equipamentos_has_posto ("equipamentos_idEquipamentos", "posto_idPosto") FRO
 -- Data for Name: paciente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY paciente (cpf, nome, dtnascimento, endereco, complemento, cidade, estado) FROM stdin;
+COPY paciente (cpf, nome, endereco, complemento, cidade, estado, datanasc) FROM stdin;
 \.
 
 
@@ -260,7 +260,7 @@ ALTER TABLE ONLY posto
     ADD CONSTRAINT posto_pk PRIMARY KEY (idposto);
 
 
--- Completed on 2017-11-16 22:37:35
+-- Completed on 2017-11-16 23:32:23
 
 --
 -- PostgreSQL database dump complete

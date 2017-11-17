@@ -17,16 +17,16 @@ private Connection connection;
 	public PostoDAO(){ }
 	
 	public boolean addPosto(Posto posto){
-		String sql = "INSERT INTO Posto(nome, endereco, cidade, estado) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO Posto(nome, cidade, estado, endereco) VALUES (?, ?, ?, ?)";
 		this.connection = new ConnectionFactory().getConnection();
 		
 		try{
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
 			stmt.setString(1, posto.getNome());
-			stmt.setString(2, posto.getEndereco());
-			stmt.setString(3, posto.getCidade());
-			stmt.setString(4, posto.getEstado());
+			stmt.setString(2, posto.getCidade());
+			stmt.setString(3, posto.getEstado());
+			stmt.setString(4, posto.getEndereco());
 			
 			
 			int qtdRowsAffected = stmt.executeUpdate();
