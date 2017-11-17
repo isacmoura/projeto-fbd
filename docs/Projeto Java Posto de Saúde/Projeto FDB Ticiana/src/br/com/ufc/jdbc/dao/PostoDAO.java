@@ -83,7 +83,7 @@ private Connection connection;
 	}
 	
 	public boolean deletePosto (int idPosto) {
-		String sql = "DELETE FROM posto WHERE idPosto = ?";
+		String sql = "DELETE FROM usuario WHERE idPosto = ?";
 		
 		this.connection = new ConnectionFactory().getConnection();
 
@@ -99,7 +99,7 @@ private Connection connection;
 				JOptionPane.showMessageDialog(null,"Posto deletado com sucesso");
 				return true;
 			}
-			JOptionPane.showMessageDialog(null,"Posto não pode ser deletado ou inexistente");
+			JOptionPane.showMessageDialog(null,"Posto não pode ser deletado");
 			return false;
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,e.getMessage());
@@ -144,7 +144,7 @@ private Connection connection;
 				e.printStackTrace();
 			}
 		}
-		JOptionPane.showMessageDialog(null, "NADA ENCONTRADO");
+		System.out.println("NADA ENCONTRADO");
 		return null;
 	}
 }

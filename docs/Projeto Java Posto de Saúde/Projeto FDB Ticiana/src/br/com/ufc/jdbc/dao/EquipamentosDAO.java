@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import br.com.ufc.jdbc.jdbc.ConnectionFactory;
 import br.com.ufc.jdbc.pojo.Equipamentos;
 
@@ -30,10 +28,10 @@ public class EquipamentosDAO {
 			int qtdRowsAffected = stmt.executeUpdate();
 			stmt.close();
 			if(qtdRowsAffected > 0) {
-				JOptionPane.showMessageDialog(null, "Equipamento adicionado!");
+				System.out.println("Equipamento adicionado!");
 				return true;
 			}
-			JOptionPane.showMessageDialog(null, "Erro ao adicionar!");
+			System.out.println("Erro ao adicionar!");
 			return false;
 		}catch(SQLException e){
 			System.err.println(e.getMessage());
@@ -79,7 +77,7 @@ public class EquipamentosDAO {
 	}
 	
 	public boolean deleteEquip (int id) {
-		String sql = "DELETE FROM equipamentos WHERE id = ?";
+		String sql = "DELETE FROM usuario WHERE id = ?";
 		
 		this.connection = new ConnectionFactory().getConnection();
 
@@ -92,11 +90,10 @@ public class EquipamentosDAO {
 			int qtdRowsAffected = stmt.executeUpdate();
 			stmt.close();
 			if (qtdRowsAffected > 0){
-				JOptionPane.showMessageDialog(null,"Equipamento deletado com sucesso");
+				System.out.println("Equipamento deletado com sucesso");
 				return true;
 			}
-			JOptionPane.showMessageDialog(null, "Equipamento não pode ser deletado"
-												+ " ou inexistente");
+			System.out.println("Equipamento não pode ser deletado");
 			return false;
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -132,7 +129,7 @@ public class EquipamentosDAO {
 			stmt.close();
 			return equipamento;
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,e.getMessage());
+			System.err.println(e.getMessage());
 		}finally {
 			try {
 				this.connection.close();
@@ -140,7 +137,7 @@ public class EquipamentosDAO {
 				e.printStackTrace();
 			}
 		}
-		JOptionPane.showMessageDialog(null, "NADA ENCONTRADO");
+		System.out.println("NADA ENCONTRADO");
 		return null;
 	}
 	
