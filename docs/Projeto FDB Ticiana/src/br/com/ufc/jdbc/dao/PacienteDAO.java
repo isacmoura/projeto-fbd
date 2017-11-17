@@ -22,6 +22,7 @@ public class PacienteDAO {
 	public boolean addPosto(Paciente paciente){
 		String sql = "INSERT INTO Paciente(cpf, nome, endereco, cidade, "
 				+ "estado, dataNasc) VALUES (?, ?, ?, ?, ?, ?)";
+		
 		this.connection = new ConnectionFactory().getConnection();
 		
 		try{
