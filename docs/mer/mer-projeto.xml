@@ -714,7 +714,7 @@
       <Ligacoes>
         <Ligacao Destino_ID="2">
           <MostraCardinalidade Valor="-1" Card_id="49"/>
-          <Cardinalidades Cardinalidade="1">
+          <Cardinalidades Cardinalidade="3">
             <Cardinalidade nome="" id="49">
               <Left Valor="817"/>
               <Top Valor="142"/>
@@ -732,7 +732,7 @@
               <TamAuto Valor="-1"/>
               <Tipo Valor="0"/>
               <TextAlin Valor="0"/>
-              <Card Valor="1"/>
+              <Card Valor="3"/>
               <Fixa Valor="0"/>
               <Ligacoes/>
             </Cardinalidade>
