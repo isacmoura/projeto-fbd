@@ -1,4 +1,4 @@
-package  br.com.ufc.jdbc ;
+package src.br.com.ufc.jdbc ;
 
 public class Main{
 
