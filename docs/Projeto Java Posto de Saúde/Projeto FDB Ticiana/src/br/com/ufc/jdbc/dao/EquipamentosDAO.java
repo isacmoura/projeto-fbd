@@ -10,7 +10,6 @@ import br.com.ufc.jdbc.jdbc.ConnectionFactory;
 import br.com.ufc.jdbc.pojo.Equipamentos;
 
 
-
 public class EquipamentosDAO {
 	private Connection connection;
 	

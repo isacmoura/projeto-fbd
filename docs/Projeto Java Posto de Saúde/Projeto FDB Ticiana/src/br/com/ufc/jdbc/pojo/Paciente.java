@@ -4,38 +4,38 @@ import java.sql.Date;
 
 public class Paciente {
 	private String cpf;
-	private Posto posto;
 	private String nome;
+	private Date dataNasc;
+	private String endereco;
 	private String cidade;
 	private String estado;
-	private String logradouro;
-	private int numeroRua;
-	private Date dataNasc;
+	private Posto posto;
 	
-	
-	public Paciente(Posto posto, String nome, String cidade, String estado,
-			String logradouro, int numeroRua, Date dataNasc) {
-		super();
-		this.posto = posto;
-		this.nome = nome;
-		this.cidade = cidade;
-		this.estado = estado;
-		this.logradouro = logradouro;
-		this.numeroRua = numeroRua;
-		this.dataNasc = dataNasc;
-	}
-	public Paciente(String cpf, Posto posto, String nome, String cidade,
-			String estado, String logradouro, int numeroRua, Date dataNasc) {
+	public Paciente(String cpf,  String nome, Date dataNasc, String endereco,
+			String cidade, String estado, Posto posto) {
 		super();
 		this.cpf = cpf;
-		this.posto = posto;
+		this.dataNasc = dataNasc;
 		this.nome = nome;
+		this.setEndereco(endereco);
 		this.cidade = cidade;
 		this.estado = estado;
-		this.logradouro = logradouro;
-		this.numeroRua = numeroRua;
-		this.dataNasc = dataNasc;
+		this.posto = posto;
 	}
+
+
+	public Paciente(String nome, Date dataNasc, String endereco, String cidade,
+			String estado, Posto posto) {
+		super();
+		this.dataNasc = dataNasc;
+		this.nome = nome;
+		this.setEndereco(endereco);
+		this.cidade = cidade;
+		this.estado = estado;
+		this.posto = posto;
+	}
+	
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -66,30 +66,27 @@ public class Paciente {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public String getLogradouro() {
-		return logradouro;
-	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-	public int getNumeroRua() {
-		return numeroRua;
-	}
-	public void setNumeroRua(int numeroRua) {
-		this.numeroRua = numeroRua;
-	}
 	public Date getDataNasc() {
 		return dataNasc;
 	}
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
+	public String getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 
 	@Override
 	public String toString() {
 		return "Paciente [CPF=" + cpf + ", Nome=" + nome + ", Data de nascimento=" +
-				dataNasc + ", Endereço= " + logradouro + ", " + numeroRua + 
-				", " + cidade + ", " + estado + "]";
+				dataNasc + ", Endereço= " + endereco + ", " + cidade + ", " + estado + "]";
 	}
+
+
 	
 }

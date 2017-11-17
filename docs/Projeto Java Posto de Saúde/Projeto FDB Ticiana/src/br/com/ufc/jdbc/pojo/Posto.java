@@ -3,29 +3,25 @@ package br.com.ufc.jdbc.pojo;
 public class Posto {
 	private int idPosto;
 	private String nome;
+	private String endereco;
 	private String cidade;
 	private String estado;
-	private String logradouro;
-	private int numeroRua;
 	
-	public Posto(String nome, String cidade, String estado, String logradouro,
-			int numeroRua) {
+	
+	public Posto(String nome, String endereco, String cidade, String estado) {
 		super();
 		this.nome = nome;
 		this.cidade = cidade;
 		this.estado = estado;
-		this.logradouro = logradouro;
-		this.numeroRua = numeroRua;
+		this.endereco = endereco;
 	}
-	public Posto(int idPosto, String nome, String cidade, String estado,
-			String logradouro, int numeroRua) {
+	public Posto(int idPosto, String nome, String endereco, String cidade, String estado) {
 		super();
 		this.idPosto = idPosto;
 		this.nome = nome;
 		this.cidade = cidade;
 		this.estado = estado;
-		this.logradouro = logradouro;
-		this.numeroRua = numeroRua;
+		this.endereco = endereco;
 	}
 	public int getIdPosto() {
 		return idPosto;
@@ -51,23 +47,18 @@ public class Posto {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public String getLogradouro() {
-		return logradouro;
+	public String getEndereco() {
+		return endereco;
 	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
-	public int getNumeroRua() {
-		return numeroRua;
-	}
-	public void setNumeroRua(int numeroRua) {
-		this.numeroRua = numeroRua;
-	}
+	
 	
 	@Override
 	public String toString() {
-		return "Posto [id=" + idPosto + ", Nome=" + nome + ", Endereço= " + logradouro
-				+ ", " + numeroRua + ", " + cidade + ", " + estado + "]";
+		return "Posto [id=" + idPosto + ", Nome=" + nome + ", Endereço= " + endereco +
+				", " + cidade + ", " + estado + "]";
 	}
 	
 }
