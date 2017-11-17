@@ -47,7 +47,7 @@ public class EquipamentosDAO {
 		return false;
 	}
 	
-	public ArrayList<Equipamentos> getListUser() {
+	public ArrayList<Equipamentos> getListEquipamentos() {
 		String sql = "SELECT * FROM equipamentos;";
 		ArrayList<Equipamentos> listaEquipamentos = new ArrayList<Equipamentos>();
 		
