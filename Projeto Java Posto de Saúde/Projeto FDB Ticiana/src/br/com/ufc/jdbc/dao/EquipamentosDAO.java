@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import br.com.ufc.jdbc.jdbc.ConnectionFactory;
 import br.com.ufc.jdbc.pojo.Equipamentos;
-
 
 
 public class EquipamentosDAO {
@@ -29,10 +30,10 @@ public class EquipamentosDAO {
 			int qtdRowsAffected = stmt.executeUpdate();
 			stmt.close();
 			if(qtdRowsAffected > 0) {
-				System.out.println("Equipamento adicionado!");
+				JOptionPane.showMessageDialog(null, "Equipamento adicionado!");
 				return true;
 			}
-			System.out.println("Erro ao adicionar!");
+			JOptionPane.showMessageDialog(null, "Erro ao adicionar!");
 			return false;
 		}catch(SQLException e){
 			System.err.println(e.getMessage());
@@ -78,7 +79,7 @@ public class EquipamentosDAO {
 	}
 	
 	public boolean deleteEquip (int id) {
-		String sql = "DELETE FROM usuario WHERE id = ?";
+		String sql = "DELETE FROM equipamentos WHERE id = ?";
 		
 		this.connection = new ConnectionFactory().getConnection();
 
@@ -91,10 +92,11 @@ public class EquipamentosDAO {
 			int qtdRowsAffected = stmt.executeUpdate();
 			stmt.close();
 			if (qtdRowsAffected > 0){
-				System.out.println("Equipamento deletado com sucesso");
+				JOptionPane.showMessageDialog(null,"Equipamento deletado com sucesso");
 				return true;
 			}
-			System.out.println("Equipamento não pode ser deletado");
+			JOptionPane.showMessageDialog(null, "Equipamento não pode ser deletado"
+												+ " ou inexistente");
 			return false;
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -130,7 +132,7 @@ public class EquipamentosDAO {
 			stmt.close();
 			return equipamento;
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+			JOptionPane.showMessageDialog(null,e.getMessage());
 		}finally {
 			try {
 				this.connection.close();
@@ -138,7 +140,7 @@ public class EquipamentosDAO {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("NADA ENCONTRADO");
+		JOptionPane.showMessageDialog(null, "NADA ENCONTRADO");
 		return null;
 	}
 	
