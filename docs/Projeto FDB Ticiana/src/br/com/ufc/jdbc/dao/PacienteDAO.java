@@ -19,7 +19,7 @@ public class PacienteDAO {
 
 	public PacienteDAO(){ }
 	
-	public boolean addPosto(Paciente paciente){
+	public boolean addPaciente(Paciente paciente){
 		String sql = "INSERT INTO Paciente(cpf, nome, endereco, cidade, "
 				+ "estado, dataNasc) VALUES (?, ?, ?, ?, ?, ?)";
 		
