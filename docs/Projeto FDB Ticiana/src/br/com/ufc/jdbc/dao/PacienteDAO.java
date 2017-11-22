@@ -72,8 +72,8 @@ public class PacienteDAO {
 				String cidade = rs.getString("cidade");
 				String estado = rs.getString("estado");
 				
-				Paciente paciente = new Paciente(cpf, nome, dataNasc, endereco,
-												cidade, estado);
+				Paciente paciente = new Paciente(cpf, nome, endereco,
+												cidade, estado, dataNasc);
 				
 				listaPosto.add(paciente);
 			}
@@ -138,9 +138,9 @@ public class PacienteDAO {
 			ResultSet rs = stmt.executeQuery();
 			rs.next();
 
-			Paciente paciente = new Paciente(cpf, rs.getString("nome"), rs.getDate("dataNasc"), 
+			Paciente paciente = new Paciente(cpf, rs.getString("nome"), 
 									rs.getString("endereco"), rs.getString("cidade"),
-									rs.getString("estado"));
+									rs.getString("estado"), rs.getDate("dataNasc"));
 			
 			stmt.close();
 			return paciente;

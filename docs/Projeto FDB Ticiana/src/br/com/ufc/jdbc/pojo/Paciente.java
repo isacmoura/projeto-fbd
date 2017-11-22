@@ -5,14 +5,14 @@ import java.sql.Date;
 public class Paciente {
 	private String cpf;
 	private String nome;
-	private Date dataNasc;
 	private String endereco;
 	private String cidade;
 	private String estado;
+	private Date dataNasc;
 	
 	
-	public Paciente(String nome, Date dataNasc, String endereco, String cidade,
-			String estado) {
+	public Paciente(String nome, String endereco, String cidade,
+			String estado, Date dataNasc) {
 		super();
 		this.nome = nome;
 		this.dataNasc = dataNasc;
@@ -20,8 +20,8 @@ public class Paciente {
 		this.cidade = cidade;
 		this.estado = estado;
 	}
-	public Paciente(String cpf, String nome, Date dataNasc, String endereco,
-			String cidade, String estado) {
+	public Paciente(String cpf, String nome, String endereco,
+			String cidade, String estado, Date dataNasc) {
 		super();
 		this.cpf = cpf;
 		this.nome = nome;

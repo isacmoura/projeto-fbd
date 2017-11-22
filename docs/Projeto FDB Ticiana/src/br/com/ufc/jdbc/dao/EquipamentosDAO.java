@@ -67,7 +67,7 @@ public class EquipamentosDAO {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		} finally {
 			try {
 				this.connection.close();
@@ -99,7 +99,7 @@ public class EquipamentosDAO {
 												+ " ou inexistente");
 			return false;
 		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}finally {
 			try {
 				this.connection.close();

@@ -1,12 +1,22 @@
 package br.com.ufc.jdbc;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import br.com.ufc.jdbc.dao.EquipamentosDAO;
 import br.com.ufc.jdbc.dao.EquipsEnviadosDAO;
 import br.com.ufc.jdbc.dao.PacienteDAO;
 import br.com.ufc.jdbc.dao.PostoDAO;
+import br.com.ufc.jdbc.pojo.Equipamentos;
 import br.com.ufc.jdbc.pojo.EquipsEnviados;
+import br.com.ufc.jdbc.pojo.Paciente;
+import br.com.ufc.jdbc.pojo.Posto;
+
 
 public class Main{
 
@@ -53,7 +63,7 @@ public class Main{
 		
 	}
 
-	private static void menuEquipamentos(EquipamentosDAO euipDAO) {
+	private static void menuEquipamentos(EquipamentosDAO equipDAO) {
 		int option;
 		boolean end = false;
 		
@@ -67,12 +77,34 @@ public class Main{
 																+ "\n| 0 | - Voltar ao Menu Geral"));
 			switch(option){
 			case 1:
+				String nome; int qtd;
+				nome = JOptionPane.showInputDialog("Digite o nome do equipamento:");
+				qtd = Integer.parseInt(JOptionPane.showInputDialog("Digite a quantidade:"));
+				
+				Equipamentos equip = new Equipamentos(nome, qtd);
+				equipDAO.addEquip(equip);
 				break;
 			case 2:	
+				int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do equipamento:"));
+				equipDAO.deleteEquip(id);
+				
 				break;
 			case 3:
+				ArrayList<Equipamentos> listaEquip = equipDAO.getListEquipamentos();
+				if(listaEquip.size() == 0){
+					JOptionPane.showMessageDialog(null, "Lista Vazia!");
+				}else{
+					for(Equipamentos equips : listaEquip){
+						JOptionPane.showMessageDialog(null, equips.toString());
+					}
+				}
 				break;
 			case 4:
+				int idBusca = Integer.parseInt(JOptionPane.showInputDialog("Digite o id a ser procurado:"));
+				Equipamentos equipBusca = equipDAO.getEquipById(idBusca);
+				
+				if(equipBusca != null) 
+					JOptionPane.showMessageDialog(null, equipBusca.toString());
 				break;
 			case 5:
 				break;
@@ -85,14 +117,14 @@ public class Main{
 	}
 
 	private static void menuEnviarEquipamentos(PostoDAO postoDAO, 
-											   EquipamentosDAO euipDAO, 
+											   EquipamentosDAO equipDAO, 
 											   EquipsEnviadosDAO equipsEnviadosDAO) {
 			
 		int option;
 		boolean end = false;
 		
 		while(!end){
-			option = Integer.parseInt(JOptionPane.showInputDialog("Menu Enviar Equipentos"
+			option = Integer.parseInt(JOptionPane.showInputDialog("Menu Enviar Equipamentos"
 																+ "\n| 1 | - Enviar Equipamentos"
 																+ "\n| 2 | - Listar Equipamentos Enviados"
 																+ "\n| 0 | - Voltar ao Menu Geral"));														
@@ -123,16 +155,35 @@ public class Main{
 			
 			switch(option){
 			case 1:
+				String nome, endereco, cidade, estado;
+				nome = JOptionPane.showInputDialog("Digite o nome do posto:");
+				endereco = JOptionPane.showInputDialog("Digite o endereço do posto:");
+				cidade = JOptionPane.showInputDialog("Digite o cidade do posto:");
+				estado = JOptionPane.showInputDialog("Digite o estado do posto:");
 				
+				Posto posto = new Posto(nome, endereco, cidade, estado);
+				postoDAO.addPosto(posto);
 				break;
 			case 2:
-				
+				int idPosto = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do Posto:"));
+				postoDAO.deletePosto(idPosto);
 				break;
 			case 3:
-				
+				ArrayList<Posto> listaPosto = postoDAO.getListPosto();
+				if(listaPosto.size() == 0){
+					JOptionPane.showMessageDialog(null, "Lista Vazia!");
+				}else{
+					for(Posto postoIter: listaPosto){
+						JOptionPane.showMessageDialog(null, postoIter.toString());
+					}
+				}
 				break;
 			case 4:
+				int idBusca = Integer.parseInt(JOptionPane.showInputDialog("Digite o id a ser procurado:"));
+				Posto postoBusca = postoDAO.getPostoById(idBusca);
 				
+				if(postoBusca != null) 
+					JOptionPane.showMessageDialog(null, postoBusca.toString());
 				break;
 			case 5:
 				break;
@@ -159,16 +210,47 @@ public class Main{
 			
 			switch(option){
 			case 1:
+				String cpf, nome, endereco, cidade, estado, dataNascStr;
+				Date dataNasc = null;
+				cpf = JOptionPane.showInputDialog("Digite o cpf do Paciente:");
+				nome = JOptionPane.showInputDialog("Digite o nome do Paciente:");
+				endereco = JOptionPane.showInputDialog("Digite o endereço do Paciente:");
+				cidade = JOptionPane.showInputDialog("Digite o cidade do Paciente:");
+				estado = JOptionPane.showInputDialog("Digite o estado do Paciente:");
+				dataNascStr = JOptionPane.showInputDialog("Digite a data de nascimento do Paciente:"
+														+ "no formato dd/mm/AAAA");
 				
+				DateFormat format = new SimpleDateFormat("MM/dd/yy");
+				try {
+					dataNasc = (Date)format.parse(dataNascStr);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				Paciente paciente = new Paciente(cpf, nome, endereco, cidade, estado, dataNasc);
+				pacienteDAO.addPaciente(paciente);
 				break;
 			case 2:
-				
+				String cpfPaciente = JOptionPane.showInputDialog("Digite o cpf do Paciente:");
+				pacienteDAO.deletePaciente(cpfPaciente);
 				break;
 			case 3:
-				
+				ArrayList<Paciente> listaPaciente = pacienteDAO.getListPaciente();
+				if(listaPaciente.size() == 0){
+					JOptionPane.showMessageDialog(null, "Lista Vazia!");
+				}else{
+					for(Paciente pacienteIter: listaPaciente){
+						JOptionPane.showMessageDialog(null, pacienteIter.toString());
+					}
+				}
 				break;
 			case 4:
+				String cpfBusca = JOptionPane.showInputDialog("Digite o cpf a ser procurado:");
+				Paciente pacienteBusca = pacienteDAO.getPacienteById(cpfBusca);
 				
+				if(pacienteBusca != null) 
+					JOptionPane.showMessageDialog(null, pacienteBusca.toString());
 				break;
 			case 5:
 				break;
