@@ -192,6 +192,7 @@ private Connection connection;
 			}
 		}
 		JOptionPane.showMessageDialog(null, "NADA ENCONTRADO");
+		
 		return null;
 	}
 }
