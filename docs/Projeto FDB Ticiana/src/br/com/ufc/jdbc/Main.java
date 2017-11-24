@@ -221,7 +221,7 @@ public class Main{
 				dataNascStr = JOptionPane.showInputDialog("Digite a data de nascimento do Paciente:"
 														+ "no formato dd/mm/AAAA");
 				
-				DateFormat format = new SimpleDateFormat("MM/dd/yy");
+				DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 				try {
 					dataNasc = (Date)format.parse(dataNascStr);
 				} catch (ParseException e) {
