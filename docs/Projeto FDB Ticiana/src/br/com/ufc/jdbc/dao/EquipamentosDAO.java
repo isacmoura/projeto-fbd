@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -104,6 +105,46 @@ public class EquipamentosDAO {
 			try {
 				this.connection.close();
 			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
+	public boolean updateEquipamentos(int id){
+		System.out.println(getEquipById(id) + "\n");
+		System.out.println("Digite o novo nome:\n");
+		Scanner leia = new Scanner(System.in);
+		String nvNome = leia.nextLine();
+		System.out.println("Digite a nova quantidade:\n");
+		int nvQtd = leia.nextInt();
+		String sql = "UPDATE equipamentos SET nome = ?, quantidade = ? WHERE id = ?";
+		
+		this.connection = new ConnectionFactory().getConnection();
+		
+		try{
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			//atualizar valores no banco
+			stmt.setString(1, nvNome);
+			stmt.setInt(2, nvQtd);
+			stmt.setInt(3, id);
+			
+			int qtdRowsAffected = stmt.executeUpdate();
+			stmt.close();
+			if(qtdRowsAffected > 0){
+				JOptionPane.showMessageDialog(null,"Equipamento atualizado com sucesso");
+				return true;
+			}
+			JOptionPane.showMessageDialog(null, "Equipamento não pode ser atualizado"
+					+ " ou inexistente");
+			return false;
+		}catch(SQLException e){
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			
+		}finally{
+			try{
+				this.connection.close();
+			}catch(SQLException e){
 				e.printStackTrace();
 			}
 		}

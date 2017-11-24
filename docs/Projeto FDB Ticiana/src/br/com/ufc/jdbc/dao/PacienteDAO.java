@@ -5,11 +5,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
 
 import br.com.ufc.jdbc.jdbc.ConnectionFactory;
 import br.com.ufc.jdbc.pojo.Paciente;
@@ -116,6 +119,65 @@ public class PacienteDAO {
 			try {
 				this.connection.close();
 			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
+	public boolean updatePaciente(String CPF){
+		Date dataNasc = null;
+		System.out.println(getPacienteById(CPF) + "\n");
+		System.out.println("Digite o novo nome:\n");
+		Scanner leia = new Scanner(System.in);
+		String nvNome = leia.nextLine();
+		System.out.println("Digite o novo endereço:\n");
+		String nvEnd = leia.nextLine();
+		System.out.println("Digite a nova cidade:\n");
+		String nvCidade = leia.nextLine();
+		System.out.println("Digite o novo estado:\n");
+		String nvEstado = leia.nextLine();
+		System.out.println("Digite a nova data de nascimento:" + "no formato dd/mm/yyyy");
+		String nvDataNasc = leia.nextLine();
+		
+		DateFormat format = new SimpleDateFormat ("dd/MM/yyyy");
+		
+			try {
+				dataNasc = (Date)format.parse(nvDataNasc);
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		String sql = "UPDATE paciente SET nome = ?, endereco = ?, cidade = ?, estado = ?, datanasc = ? WHERE CPF = ?";
+		this.connection = new ConnectionFactory().getConnection();
+		
+		try{
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			//atualizar valores no banco
+			stmt.setString(1, nvNome);
+			stmt.setString(2, nvEnd);
+			stmt.setString(3, nvCidade);
+			stmt.setString(4, nvEstado);
+			stmt.setDate(5, dataNasc);
+			stmt.setString(6, CPF);
+			
+			int qtdRowsAffected = stmt.executeUpdate();
+			stmt.close();
+			if(qtdRowsAffected > 0){
+				JOptionPane.showMessageDialog(null,"Paciente atualizado com sucesso");
+				return true;
+			}
+			JOptionPane.showMessageDialog(null, "Paciente não pode ser atualizado"
+					+ " ou inexistente");
+			return false;
+		}catch(SQLException e){
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			
+		}finally{
+			try{
+				this.connection.close();
+			}catch(SQLException e){
 				e.printStackTrace();
 			}
 		}

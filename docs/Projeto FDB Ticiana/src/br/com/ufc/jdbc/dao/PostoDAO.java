@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -113,8 +114,54 @@ private Connection connection;
 		return false;
 	}
 	
+	public boolean updatePosto(int id){
+		System.out.println(getPostoById(id) + "\n");
+		System.out.println("Digite o novo nome:\n");
+		Scanner leia = new Scanner(System.in);
+		String nvNome = leia.nextLine();
+		System.out.println("Digite o novo endereço:\n");
+		String nvEnd = leia.nextLine();
+		System.out.println("Digite a nova cidade:\n");
+		String nvCidade = leia.nextLine();
+		System.out.println("Digite o novo estado:\n");
+		String nvEstado = leia.nextLine();
+		String sql = "UPDATE posto SET nome = ?, endereco = ?, cidade = ?, estado = ? WHERE idPosto = ?";
+		
+		this.connection = new ConnectionFactory().getConnection();
+		
+		try{
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			//atualizar valores no banco
+			stmt.setString(1, nvNome);
+			stmt.setString(2, nvEnd);
+			stmt.setString(3, nvCidade);
+			stmt.setString(4, nvEstado);
+			stmt.setInt(5, id);
+			
+			int qtdRowsAffected = stmt.executeUpdate();
+			stmt.close();
+			if(qtdRowsAffected > 0){
+				JOptionPane.showMessageDialog(null,"Posto atualizado com sucesso");
+				return true;
+			}
+			JOptionPane.showMessageDialog(null, "Posto não pode ser atualizado"
+					+ " ou inexistente");
+			return false;
+		}catch(SQLException e){
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			
+		}finally{
+			try{
+				this.connection.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
 	public Posto getPostoById(int idPosto){
-		String sql = "SELECT * FROM equipamentos WHERE idPosto = ?;";
+		String sql = "SELECT * FROM posto WHERE idPosto = ?;";
 
 		try {
 			// prepared statement para inserção
