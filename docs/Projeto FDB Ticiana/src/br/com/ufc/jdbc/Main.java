@@ -82,7 +82,7 @@ public class Main{
 				qtd = Integer.parseInt(JOptionPane.showInputDialog("Digite a quantidade:"));
 				
 				Equipamentos equip = new Equipamentos(nome, qtd);
-				equipDAO.addEquip(equip);
+				if(validaEquipamento(equip)) equipDAO.addEquip(equip);
 				break;
 			case 2:	
 				int id = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do equipamento:"));
@@ -162,7 +162,7 @@ public class Main{
 				estado = JOptionPane.showInputDialog("Digite o estado do posto:");
 				
 				Posto posto = new Posto(nome, endereco, cidade, estado);
-				postoDAO.addPosto(posto);
+				if(validaPosto(posto)) postoDAO.addPosto(posto);
 				break;
 			case 2:
 				int idPosto = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do Posto:"));
@@ -196,6 +196,7 @@ public class Main{
 	}
 
 	private static void menuPaciente(PacienteDAO pacienteDAO) {
+
 		int option;
 		boolean end = false;
 		
@@ -229,11 +230,15 @@ public class Main{
 				}
 				
 				Paciente paciente = new Paciente(cpf, nome, endereco, cidade, estado, dataNasc);
-				pacienteDAO.addPaciente(paciente);
+				if(validaPaciente(paciente)){
+					pacienteDAO.addPaciente(paciente);
+				}else{
+					JOptionPane.showMessageDialog(null, "Paciente inválido, tente novamente");
+				}
 				break;
 			case 2:
 				String cpfPaciente = JOptionPane.showInputDialog("Digite o cpf do Paciente:");
-				pacienteDAO.deletePaciente(cpfPaciente);
+				if(validaCPF(cpfPaciente)) pacienteDAO.deletePaciente(cpfPaciente);
 				break;
 			case 3:
 				ArrayList<Paciente> listaPaciente = pacienteDAO.getListPaciente();
@@ -247,10 +252,13 @@ public class Main{
 				break;
 			case 4:
 				String cpfBusca = JOptionPane.showInputDialog("Digite o cpf a ser procurado:");
-				Paciente pacienteBusca = pacienteDAO.getPacienteById(cpfBusca);
-				
-				if(pacienteBusca != null) 
+				if(validaCPF(cpfBusca)){
+					Paciente pacienteBusca = pacienteDAO.getPacienteById(cpfBusca);
 					JOptionPane.showMessageDialog(null, pacienteBusca.toString());
+				}else{
+					JOptionPane.showMessageDialog(null, "Cpf inválido");
+				}
+				
 				break;
 			case 5:
 				break;
@@ -259,7 +267,77 @@ public class Main{
 				break;
 			}
 		}
-		
 	}
+	
+	public static boolean validaPaciente(Paciente paciente){
+		if(paciente.getCpf() == null || paciente.getCpf().isEmpty() ||
+			paciente.getCpf().length() != 11 || paciente.getCpf().matches("\\d+") == false){
+			JOptionPane.showMessageDialog(null, "Cpf inválido!");
+			return false;
+		}
+		if(paciente.getNome() == null || paciente.getNome().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Nome inválido!");
+			return false;
+		}
+		if(paciente.getEndereco() == null || paciente.getEndereco().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Endereco inválido!");
+			return false;
+		}
+		if(paciente.getCidade() == null || paciente.getCidade().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Cidade inválida");
+			return false;
+		}
+		if(paciente.getEstado() == null || paciente.getEstado().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Estado inválido");
+			return false;
+		}
+		if(paciente.getDataNasc() == null){
+			JOptionPane.showMessageDialog(null, "Data inválida");
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean validaPosto(Posto posto){
+	
+		if(posto.getNome() == null || posto.getNome().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Nome inválido!");
+			return false;
+		}
+		if(posto.getEndereco() == null || posto.getEndereco().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Endereco inválido!");
+			return false;
+		}
+		if(posto.getCidade() == null || posto.getCidade().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Cidade inválida");
+			return false;
+		}
+		if(posto.getEstado() == null || posto.getEstado().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Estado inválido");
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean validaEquipamento(Equipamentos equip){
+		if(equip.getNome() == null || equip.getNome().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Nome inválido!");
+			return false;
+		}
+		if(equip.getQuantidade() < 0){
+			JOptionPane.showMessageDialog(null, "Quantidade inválida!");
+			return false;
+		}
+		return true;
+	}
+	
+	public static boolean validaCPF(String cpf){
+		if(cpf == null || cpf.isEmpty() || cpf.length() != 11 || cpf.matches("\\d+") == false){
+				JOptionPane.showMessageDialog(null, "Cpf inválido!");
+				return false;
+		}
+		return true;
+	}
+	
 
 }
