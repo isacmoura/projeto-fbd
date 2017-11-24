@@ -111,13 +111,8 @@ public class EquipamentosDAO {
 		return false;
 	}
 	
-	public boolean updateEquipamentos(int id){
-		System.out.println(getEquipById(id) + "\n");
-		System.out.println("Digite o novo nome:\n");
-		Scanner leia = new Scanner(System.in);
-		String nvNome = leia.nextLine();
-		System.out.println("Digite a nova quantidade:\n");
-		int nvQtd = leia.nextInt();
+	public boolean updateEquipamentos(int id, Equipamentos equipUpd){
+
 		String sql = "UPDATE equipamentos SET nome = ?, quantidade = ? WHERE id = ?";
 		
 		this.connection = new ConnectionFactory().getConnection();
@@ -125,8 +120,8 @@ public class EquipamentosDAO {
 		try{
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			//atualizar valores no banco
-			stmt.setString(1, nvNome);
-			stmt.setInt(2, nvQtd);
+			stmt.setString(1, equipUpd.getNome());
+			stmt.setInt(2, equipUpd.getQuantidade());
 			stmt.setInt(3, id);
 			
 			int qtdRowsAffected = stmt.executeUpdate();

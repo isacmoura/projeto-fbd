@@ -107,6 +107,16 @@ public class Main{
 					JOptionPane.showMessageDialog(null, equipBusca.toString());
 				break;
 			case 5:
+				int idUpd = Integer.parseInt(JOptionPane.showInputDialog("Digite o id a ser atualizado:"));
+				Equipamentos equipUpd = equipDAO.getEquipById(idUpd);
+				String nomeNew = JOptionPane.showInputDialog("Digite o novo nome:");
+				int qtdNew =Integer.parseInt(JOptionPane.showInputDialog("Digite a nova quantidade:"));
+				
+				equipUpd.setNome(nomeNew);
+				equipUpd.setQuantidade(qtdNew);
+				
+				equipDAO.updateEquipamentos(idUpd, equipUpd);
+				
 				break;
 			default:
 				end = true;
@@ -186,6 +196,7 @@ public class Main{
 					JOptionPane.showMessageDialog(null, postoBusca.toString());
 				break;
 			case 5:
+				
 				break;
 			default:
 				end = true;
