@@ -130,8 +130,21 @@ public class Main{
 																+ "\n| 0 | - Voltar ao Menu Geral"));														
 			switch(option){
 			case 1:
+				int idEquip, idPosto;
+				idEquip = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do equipamento:"));
+				idPosto = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do posto:"));
+			
+				Equipamentos equip = equipDAO.getEquipById(idEquip);
+				Posto posto = postoDAO.getPostoById(idPosto);
+				
+				equipsEnviadosDAO.enviarEquips(equip, posto);
 				break;
 			case 2:	
+				ArrayList<EquipsEnviados> listEquipsEnviados = equipsEnviadosDAO.getListEquipsEnviados();
+				for(EquipsEnviados equipsEnv : listEquipsEnviados){
+					JOptionPane.showMessageDialog(null, equipsEnv.getEquipamento().getNome() 
+									+ " foi enviado para o Posto " + equipsEnv.getPosto().getNome());
+				}
 				break;
 			default:
 				end = true;
