@@ -162,7 +162,8 @@ private Connection connection;
 	
 	public Posto getPostoById(int idPosto){
 		String sql = "SELECT * FROM posto WHERE idPosto = ?;";
-
+		this.connection = new ConnectionFactory().getConnection();
+		
 		try {
 			// prepared statement para inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -183,7 +184,7 @@ private Connection connection;
 			stmt.close();
 			return posto;
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,e.getMessage());
+			System.err.println(e.getMessage());
 		}finally {
 			try {
 				this.connection.close();

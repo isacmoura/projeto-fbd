@@ -53,12 +53,13 @@ public class EquipamentosDAO {
 		ArrayList<Equipamentos> listaEquipamentos = new ArrayList<Equipamentos>();
 		
 		this.connection = new ConnectionFactory().getConnection();
+		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				int id = rs.getInt("id");
+				int id = rs.getInt("idequipamentos");
 				String nome = rs.getString("nome");
 				int quantidade = rs.getInt("quantidade");
 				
@@ -80,7 +81,7 @@ public class EquipamentosDAO {
 	}
 	
 	public boolean deleteEquip (int id) {
-		String sql = "DELETE FROM equipamentos WHERE id = ?";
+		String sql = "DELETE FROM equipamentos WHERE idequipamentos = ?";
 		
 		this.connection = new ConnectionFactory().getConnection();
 
@@ -113,7 +114,7 @@ public class EquipamentosDAO {
 	
 	public boolean updateEquipamentos(int id, Equipamentos equipUpd){
 
-		String sql = "UPDATE equipamentos SET nome = ?, quantidade = ? WHERE id = ?";
+		String sql = "UPDATE equipamentos SET nome = ?, quantidade = ? WHERE idequipamentos = ?";
 		
 		this.connection = new ConnectionFactory().getConnection();
 		
@@ -147,8 +148,9 @@ public class EquipamentosDAO {
 	}
 	
 	public Equipamentos getEquipById(int id){
-		String sql = "SELECT * FROM equipamentos WHERE id = ?;";
-
+		String sql = "SELECT * FROM equipamentos WHERE idequipamentos = ?;";
+		this.connection = new ConnectionFactory().getConnection();
+		
 		try {
 			// prepared statement para inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -168,7 +170,7 @@ public class EquipamentosDAO {
 			stmt.close();
 			return equipamento;
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,e.getMessage());
+			System.err.println(e.getMessage());
 		}finally {
 			try {
 				this.connection.close();

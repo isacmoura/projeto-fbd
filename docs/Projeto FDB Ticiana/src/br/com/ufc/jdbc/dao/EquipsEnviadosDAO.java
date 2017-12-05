@@ -73,7 +73,7 @@ public class EquipsEnviadosDAO {
 			}
 			stmt.close();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			System.err.println(e.getMessage());
 		}finally {
 			try {
 				this.connection.close();

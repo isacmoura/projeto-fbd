@@ -1,3 +1,4 @@
+
 package br.com.ufc.jdbc;
 
 import java.sql.Date;
@@ -109,14 +110,15 @@ public class Main{
 			case 5:
 				int idUpd = Integer.parseInt(JOptionPane.showInputDialog("Digite o id a ser atualizado:"));
 				Equipamentos equipUpd = equipDAO.getEquipById(idUpd);
-				String nomeNew = JOptionPane.showInputDialog("Digite o novo nome:");
-				int qtdNew =Integer.parseInt(JOptionPane.showInputDialog("Digite a nova quantidade:"));
-				
-				equipUpd.setNome(nomeNew);
-				equipUpd.setQuantidade(qtdNew);
-				
-				equipDAO.updateEquipamentos(idUpd, equipUpd);
-				
+				if(equipUpd != null){
+					String nomeNew = JOptionPane.showInputDialog("Digite o novo nome:");
+					int qtdNew =Integer.parseInt(JOptionPane.showInputDialog("Digite a nova quantidade:"));
+					
+					equipUpd.setNome(nomeNew);
+					equipUpd.setQuantidade(qtdNew);
+					
+					equipDAO.updateEquipamentos(idUpd, equipUpd);
+				}
 				break;
 			default:
 				end = true;
@@ -231,10 +233,14 @@ public class Main{
 				estado = JOptionPane.showInputDialog("Digite o estado do Paciente:");
 				dataNascStr = JOptionPane.showInputDialog("Digite a data de nascimento do Paciente:"
 														+ "no formato dd/mm/AAAA");
-				
-				DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+		        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		        
+				//DateFormat format = new SimpleDateFormat("dd/mm/YYYY");
 				try {
-					dataNasc = (Date)format.parse(dataNascStr);
+					java.util.Date parsed = format.parse(dataNascStr);
+					dataNasc = new Date(parsed.getTime());
+					//dataNasc = (Date)format.parse(dataNascStr);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -265,7 +271,8 @@ public class Main{
 				String cpfBusca = JOptionPane.showInputDialog("Digite o cpf a ser procurado:");
 				if(validaCPF(cpfBusca)){
 					Paciente pacienteBusca = pacienteDAO.getPacienteById(cpfBusca);
-					JOptionPane.showMessageDialog(null, pacienteBusca.toString());
+					if(pacienteBusca != null)
+						JOptionPane.showMessageDialog(null, pacienteBusca.toString());
 				}else{
 					JOptionPane.showMessageDialog(null, "Cpf inválido");
 				}

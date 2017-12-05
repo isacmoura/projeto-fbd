@@ -186,7 +186,8 @@ public class PacienteDAO {
 	
 	public Paciente getPacienteById(String cpf){
 		String sql = "SELECT * FROM paciente WHERE cpf = ?;";
-
+		this.connection = new ConnectionFactory().getConnection();
+		
 		try {
 			// prepared statement para inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -207,7 +208,7 @@ public class PacienteDAO {
 			stmt.close();
 			return paciente;
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null,e.getMessage());
+			System.err.println(e.getMessage());
 		}finally {
 			try {
 				this.connection.close();
