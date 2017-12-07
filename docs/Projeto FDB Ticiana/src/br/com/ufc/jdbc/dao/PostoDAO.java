@@ -114,17 +114,8 @@ private Connection connection;
 		return false;
 	}
 	
-	public boolean updatePosto(int id){
-		System.out.println(getPostoById(id) + "\n");
-		System.out.println("Digite o novo nome:\n");
-		Scanner leia = new Scanner(System.in);
-		String nvNome = leia.nextLine();
-		System.out.println("Digite o novo endereço:\n");
-		String nvEnd = leia.nextLine();
-		System.out.println("Digite a nova cidade:\n");
-		String nvCidade = leia.nextLine();
-		System.out.println("Digite o novo estado:\n");
-		String nvEstado = leia.nextLine();
+	public boolean updatePosto(int id, Posto postoUpd){
+
 		String sql = "UPDATE posto SET nome = ?, endereco = ?, cidade = ?, estado = ? WHERE idPosto = ?";
 		
 		this.connection = new ConnectionFactory().getConnection();
@@ -132,10 +123,10 @@ private Connection connection;
 		try{
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			//atualizar valores no banco
-			stmt.setString(1, nvNome);
-			stmt.setString(2, nvEnd);
-			stmt.setString(3, nvCidade);
-			stmt.setString(4, nvEstado);
+			stmt.setString(1, postoUpd.getNome());
+			stmt.setString(2, postoUpd.getEndereco());
+			stmt.setString(3, postoUpd.getCidade());
+			stmt.setString(4, postoUpd.getEstado());
 			stmt.setInt(5, id);
 			
 			int qtdRowsAffected = stmt.executeUpdate();

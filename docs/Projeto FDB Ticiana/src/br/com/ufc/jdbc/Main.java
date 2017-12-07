@@ -198,7 +198,21 @@ public class Main{
 					JOptionPane.showMessageDialog(null, postoBusca.toString());
 				break;
 			case 5:
-				
+				int idUpd = Integer.parseInt(JOptionPane.showInputDialog("Digite o id a ser atualizado:"));
+				Posto postoUpd = postoDAO.getPostoById(idUpd);
+				if(postoUpd != null){
+					String nomeNew = JOptionPane.showInputDialog("Digite o novo nome:");
+					String endNew = JOptionPane.showInputDialog("Digite o novo endereço:");
+					String cidadeNew = JOptionPane.showInputDialog("Digite o novo estado:");
+					String estadoNew = JOptionPane.showInputDialog("Digite a nova cidade:");
+					
+					postoUpd.setNome(nomeNew);
+					postoUpd.setEndereco(estadoNew);
+					postoUpd.setCidade(cidadeNew);
+					postoUpd.setEstado(estadoNew);
+					
+					postoDAO.updatePosto(idUpd, postoUpd);
+				}
 				break;
 			default:
 				end = true;
@@ -236,11 +250,9 @@ public class Main{
 
 		        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		        
-				//DateFormat format = new SimpleDateFormat("dd/mm/YYYY");
 				try {
 					java.util.Date parsed = format.parse(dataNascStr);
 					dataNasc = new Date(parsed.getTime());
-					//dataNasc = (Date)format.parse(dataNascStr);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -279,6 +291,37 @@ public class Main{
 				
 				break;
 			case 5:
+				String cpfUpd = JOptionPane.showInputDialog("Digite o cpf a ser atualizado:");
+				if(validaCPF(cpfUpd) != false){
+					Paciente pacienteUpd = pacienteDAO.getPacienteById(cpfUpd);
+					if(pacienteUpd != null){
+						Date dataNascNew = null;
+						
+						String nomeNew = JOptionPane.showInputDialog("Digite o novo nome:");
+						String endNew = JOptionPane.showInputDialog("Digite o novo endereço:");
+						String cidadeNew = JOptionPane.showInputDialog("Digite o novo cidade:");
+						String estadoNew = JOptionPane.showInputDialog("Digite a nova estado:");
+						dataNascStr = JOptionPane.showInputDialog("Digite a nova data de nascimento:"
+																  + "no formato dd/mm/AAAA");
+						SimpleDateFormat formatNew = new SimpleDateFormat("dd/MM/yyyy");
+						
+						try {
+						java.util.Date parsed = formatNew.parse(dataNascStr);
+						dataNascNew = new Date(parsed.getTime());
+						} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						}
+
+						pacienteUpd.setNome(nomeNew);
+						pacienteUpd.setEndereco(endNew);
+						pacienteUpd.setCidade(cidadeNew);
+						pacienteUpd.setEstado(estadoNew);
+						pacienteUpd.setDataNasc(dataNascNew);
+						
+						pacienteDAO.updatePaciente(cpfUpd, pacienteUpd);
+					}	
+				}
 				break;
 			default:
 				end = true;

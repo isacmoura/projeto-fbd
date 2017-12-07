@@ -125,29 +125,7 @@ public class PacienteDAO {
 		return false;
 	}
 	
-	public boolean updatePaciente(String CPF){
-		Date dataNasc = null;
-		System.out.println(getPacienteById(CPF) + "\n");
-		System.out.println("Digite o novo nome:\n");
-		Scanner leia = new Scanner(System.in);
-		String nvNome = leia.nextLine();
-		System.out.println("Digite o novo endereço:\n");
-		String nvEnd = leia.nextLine();
-		System.out.println("Digite a nova cidade:\n");
-		String nvCidade = leia.nextLine();
-		System.out.println("Digite o novo estado:\n");
-		String nvEstado = leia.nextLine();
-		System.out.println("Digite a nova data de nascimento:" + "no formato dd/mm/yyyy");
-		String nvDataNasc = leia.nextLine();
-		
-		DateFormat format = new SimpleDateFormat ("dd/MM/yyyy");
-		
-			try {
-				dataNasc = (Date)format.parse(nvDataNasc);
-			} catch (java.text.ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public boolean updatePaciente(String CPF, Paciente pacienteUpd){
 		
 		String sql = "UPDATE paciente SET nome = ?, endereco = ?, cidade = ?, estado = ?, datanasc = ? WHERE CPF = ?";
 		this.connection = new ConnectionFactory().getConnection();
@@ -155,11 +133,11 @@ public class PacienteDAO {
 		try{
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			//atualizar valores no banco
-			stmt.setString(1, nvNome);
-			stmt.setString(2, nvEnd);
-			stmt.setString(3, nvCidade);
-			stmt.setString(4, nvEstado);
-			stmt.setDate(5, dataNasc);
+			stmt.setString(1, pacienteUpd.getNome());
+			stmt.setString(2, pacienteUpd.getEndereco());
+			stmt.setString(3, pacienteUpd.getCidade());
+			stmt.setString(4, pacienteUpd.getEstado());
+			stmt.setDate(5, pacienteUpd.getDataNasc());
 			stmt.setString(6, CPF);
 			
 			int qtdRowsAffected = stmt.executeUpdate();
