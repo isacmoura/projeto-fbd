@@ -143,28 +143,28 @@ public class Main{
 																+ "\n| 2 | - Listar Equipamentos Enviados"
 																+ "\n| 0 | - Voltar ao Menu Geral"));														
 			switch(option){
-			//Comentário pro commit
-			case 1:
-				int idEquip, idPosto;
-				idEquip = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do equipamento:"));
-				idPosto = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do posto:"));
-				
-				Equipamentos equip = equipDAO.getEquipById(idEquip);
-				Posto posto = postoDAO.getPostoById(idPosto);
-				
-				if((equip != null) && (posto != null)){
-					equipsEnviadosDAO.enviarEquips(idEquip, idPosto);
-				}else{
-					JOptionPane.showMessageDialog(null, "Equipamento ou posto inexistentes!");
+			
+				case 1:
+					int idEquip, idPosto;
+					idEquip = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do equipamento:"));
+					idPosto = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do posto:"));
+					
+					Equipamentos equip = equipDAO.getEquipById(idEquip);
+					Posto posto = postoDAO.getPostoById(idPosto);
+					
+					if((equip != null) && (posto != null)){
+						equipsEnviadosDAO.enviarEquips(idEquip, idPosto);
+					}else{
+						JOptionPane.showMessageDialog(null, "Equipamento ou posto inexistentes!");
+					}
+					
+					break;
+				case 2:	
+					break;
+				default:
+					end = true;
+					break;
 				}
-				
-				break;
-			case 2:	
-				break;
-			default:
-				end = true;
-				break;
-			}
 		}
 	}
 

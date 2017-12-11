@@ -21,20 +21,22 @@ public class EquipsEnviadosDAO {
 	
 	}
 	
-	public boolean enviarEquips(Equipamentos equip, Posto posto){
-		String sql = "INSERT INTO equipamentos_has_posto (Equipamentos_idEquipamentos,"
-					+ "Posto_idPosto) VALUES (?, ?)";
+	public boolean enviarEquips(int equip, int posto){
+		String sql = "INSERT INTO equipamentos_has_posto VALUES (?, ?)";
 		this.connection = new ConnectionFactory().getConnection();
 		
 		try{
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
-			stmt.setInt(1, equip.getId());
-			stmt.setInt(2, posto.getIdPosto());
+			stmt.setInt(1, equip);
+			stmt.setInt(2, posto);
 			int qtdRowsAffected = stmt.executeUpdate();
 			stmt.close();
-			if (qtdRowsAffected > 0)
+			if (qtdRowsAffected > 0){
+				JOptionPane.showMessageDialog(null, "Adicionado!");
 				return true;
+			}
+			JOptionPane.showMessageDialog(null, "Erro ao adicionar!");
 			return false;
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
