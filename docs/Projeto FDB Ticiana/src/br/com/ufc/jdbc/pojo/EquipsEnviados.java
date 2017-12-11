@@ -24,7 +24,7 @@ public class EquipsEnviados {
 	
 	@Override
 	public String toString() {
-		return "Equipamento: [" + equipamento + " foi enviado para " + posto + " na quantidade " + equipamento.getQuantidade() + "]\n";
+		return "Equipamento: [" + equipamento.getNome() + " foi enviado para " + posto.getNome() + " na quantidade " + equipamento.getQuantidade() + "]\n";
 	}
 	
 	

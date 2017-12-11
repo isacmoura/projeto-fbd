@@ -72,7 +72,7 @@ public class Paciente {
 	@Override
 	public String toString() {
 		return "Paciente [CPF=" + cpf + ", Nome=" + nome + ", Data de nascimento=" +
-				dataNasc + ", Endereço= " + endereco + ", " + cidade + ", " + estado + "]";
+				dataNasc + ", Endereço= " + endereco + ", " + cidade + ", " + estado + "]\n";
 	}
 
 

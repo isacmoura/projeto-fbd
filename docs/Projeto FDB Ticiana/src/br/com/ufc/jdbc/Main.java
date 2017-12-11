@@ -209,12 +209,15 @@ public class Main{
 				break;
 			case 3:
 				ArrayList<Posto> listaPosto = postoDAO.getListPosto();
+				String postoDados = "";
+				
 				if(listaPosto.size() == 0){
 					JOptionPane.showMessageDialog(null, "Lista Vazia!");
 				}else{
 					for(Posto postoIter: listaPosto){
-						JOptionPane.showMessageDialog(null, postoIter.toString());
+						postoDados += postoIter.toString();
 					}
+					JOptionPane.showMessageDialog(null, postoDados);
 				}
 				break;
 			case 4:
@@ -230,8 +233,8 @@ public class Main{
 				if(postoUpd != null){
 					String nomeNew = JOptionPane.showInputDialog("Digite o novo nome:");
 					String endNew = JOptionPane.showInputDialog("Digite o novo endereço:");
-					String cidadeNew = JOptionPane.showInputDialog("Digite o novo estado:");
-					String estadoNew = JOptionPane.showInputDialog("Digite a nova cidade:");
+					String cidadeNew = JOptionPane.showInputDialog("Digite a nova cidade:");
+					String estadoNew = JOptionPane.showInputDialog("Digite o novo estado:");
 					
 					postoUpd.setNome(nomeNew);
 					postoUpd.setEndereco(estadoNew);
@@ -298,12 +301,15 @@ public class Main{
 				break;
 			case 3:
 				ArrayList<Paciente> listaPaciente = pacienteDAO.getListPaciente();
+				String pacienteDados = "";
+				
 				if(listaPaciente.size() == 0){
 					JOptionPane.showMessageDialog(null, "Lista Vazia!");
 				}else{
 					for(Paciente pacienteIter: listaPaciente){
-						JOptionPane.showMessageDialog(null, pacienteIter.toString());
+						pacienteDados += pacienteIter.toString();
 					}
+					JOptionPane.showMessageDialog(null, pacienteDados);
 				}
 				break;
 			case 4:

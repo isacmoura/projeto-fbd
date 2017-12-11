@@ -64,21 +64,25 @@ public class EquipsEnviadosDAO {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
 			ResultSet rs = stmt.executeQuery();
+			
 			while (rs.next()) {
 				
-				int id = Integer.parseInt(rs.getString("id"));
-				Equipamentos equip = equipDAO.getEquipById(id);
+				int idEquip = Integer.parseInt(rs.getString("equipamentos_idequipamentos"));
+				Equipamentos equip = equipDAO.getEquipById(idEquip);
 				
-				int idPosto = Integer.parseInt(rs.getString("idPosto"));
+				int idPosto = Integer.parseInt(rs.getString("posto_idposto"));
 				Posto posto = postoDAO.getPostoById(idPosto);
 				
-				enviarEquip = new EquipsEnviados(equip, posto);
-				listaEnvios.add(enviarEquip);
-				
-				
+				if(equip != null && posto != null){
+					enviarEquip = new EquipsEnviados(equip, posto);
+					listaEnvios.add(enviarEquip);
+				}else{
+					JOptionPane.showMessageDialog(null, "Equipamento ou posto nao encontrado!");
+				}
 			}
 			
 			stmt.close();
+			
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}finally {

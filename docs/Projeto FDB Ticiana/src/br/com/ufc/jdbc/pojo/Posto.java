@@ -58,7 +58,7 @@ public class Posto {
 	@Override
 	public String toString() {
 		return "Posto [id=" + idPosto + ", Nome=" + nome + ", Endereço= " + endereco +
-				", " + cidade + ", " + estado + "]";
+				", " + cidade + ", " + estado + "]\n";
 	}
 	
 }
