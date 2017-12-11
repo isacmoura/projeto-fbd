@@ -21,7 +21,7 @@ public class EquipsEnviadosDAO {
 	
 	}
 	
-	public boolean enviarEquips(Equipamentos equip, Posto posto){
+	public boolean enviarEquips(int idEquip, int idPosto){
 		String sql = "INSERT INTO equipamentos_has_posto (Equipamentos_idEquipamentos,"
 					+ "Posto_idPosto) VALUES (?, ?)";
 		this.connection = new ConnectionFactory().getConnection();
@@ -29,8 +29,8 @@ public class EquipsEnviadosDAO {
 		try{
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
-			stmt.setInt(1, equip.getId());
-			stmt.setInt(2, posto.getIdPosto());
+			stmt.setInt(1, idEquip);
+			stmt.setInt(2, idPosto);
 			int qtdRowsAffected = stmt.executeUpdate();
 			stmt.close();
 			if (qtdRowsAffected > 0)
