@@ -143,6 +143,7 @@ public class Main{
 																+ "\n| 2 | - Listar Equipamentos Enviados"
 																+ "\n| 0 | - Voltar ao Menu Geral"));														
 			switch(option){
+			//Comentário pro commit
 			case 1:
 				int idEquip, idPosto;
 				idEquip = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do equipamento:"));
