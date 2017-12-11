@@ -51,26 +51,31 @@ public class EquipsEnviadosDAO {
 	
 	public ArrayList<EquipsEnviados> getListEquipsEnviados() {
 		String sql = "SELECT * FROM equipamentos_has_posto;";
+		EquipamentosDAO equipDAO = new EquipamentosDAO();
+		PostoDAO postoDAO = new PostoDAO();
+		EquipsEnviados enviarEquip;
+		
 		ArrayList<EquipsEnviados> listaEnvios = new ArrayList<EquipsEnviados>();
+		
 		this.connection = new ConnectionFactory().getConnection();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
+				
 				int id = Integer.parseInt(rs.getString("id"));
-				EquipamentosDAO equipDAO = new EquipamentosDAO();
 				Equipamentos equip = equipDAO.getEquipById(id);
 				
 				int idPosto = Integer.parseInt(rs.getString("idPosto"));
-				PostoDAO postoDAO = new PostoDAO();
 				Posto posto = postoDAO.getPostoById(idPosto);
 				
-				EquipsEnviados enviarEquip = new EquipsEnviados(equip, posto);
+				enviarEquip = new EquipsEnviados(equip, posto);
+				listaEnvios.add(enviarEquip);
 				
 				
-				return listaEnvios;
 			}
+			
 			stmt.close();
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
