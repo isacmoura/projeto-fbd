@@ -40,7 +40,7 @@ public class Equipamentos {
 	
 	@Override
 	public String toString() {
-		return "Equipamento [id= " + id + ", Nome=" + nome + ", Quantidade=" + quantidade + "]\n";
+		return "Equipamento [id= " + id + ", Nome=" + nome + ", Quantidade=" + quantidade + "]";
 	}
 	
 }

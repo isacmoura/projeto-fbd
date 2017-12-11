@@ -91,15 +91,13 @@ public class Main{
 				
 				break;
 			case 3:
-				String equipamentos = "";
 				ArrayList<Equipamentos> listaEquip = equipDAO.getListEquipamentos();
 				if(listaEquip.size() == 0){
 					JOptionPane.showMessageDialog(null, "Lista Vazia!");
 				}else{
 					for(Equipamentos equips : listaEquip){
-						equipamentos += equips.toString();
+						JOptionPane.showMessageDialog(null, equips.toString());
 					}
-					JOptionPane.showMessageDialog(null, equipamentos);
 				}
 				break;
 			case 4:
@@ -145,19 +143,6 @@ public class Main{
 			switch(option){
 			//Comentário pro commit
 			case 1:
-				int idEquip, idPosto;
-				idEquip = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do equipamento:"));
-				idPosto = Integer.parseInt(JOptionPane.showInputDialog("Digite o id do posto:"));
-				
-				Equipamentos equip = equipDAO.getEquipById(idEquip);
-				Posto posto = postoDAO.getPostoById(idPosto);
-				
-				if((equip != null) && (posto != null)){
-					equipsEnviadosDAO.enviarEquips(idEquip, idPosto);
-				}else{
-					JOptionPane.showMessageDialog(null, "Equipamento ou posto inexistentes!");
-				}
-				
 				break;
 			case 2:	
 				break;
@@ -167,7 +152,6 @@ public class Main{
 			}
 		}
 	}
-
 
 	private static void menuPosto(PostoDAO postoDAO) {
 		int option;
