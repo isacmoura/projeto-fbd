@@ -22,5 +22,10 @@ public class EquipsEnviados {
 		this.posto = posto;
 	}
 	
+	@Override
+	public String toString() {
+		return "Equipamento: [" + equipamento + " foi enviado para " + posto + " na quantidade " + equipamento.getQuantidade() + "]\n";
+	}
+	
 	
 }

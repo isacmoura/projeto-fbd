@@ -160,6 +160,16 @@ public class Main{
 					
 					break;
 				case 2:	
+					String equipamentos = "";
+					ArrayList<EquipsEnviados> listaEquipsEnv = equipsEnviadosDAO.getListEquipsEnviados();
+					if(listaEquipsEnv.size() == 0){
+						JOptionPane.showMessageDialog(null, "Lista Vazia!");
+					}else{
+						for(EquipsEnviados equipsenv : listaEquipsEnv){
+							equipamentos += equipsenv.toString();
+						}
+						JOptionPane.showMessageDialog(null, equipamentos);
+					}
 					break;
 				default:
 					end = true;
